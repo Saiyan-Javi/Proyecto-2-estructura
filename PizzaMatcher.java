@@ -14,8 +14,10 @@ public class PizzaMatcher {
     Map<String, ArrayList<String>> pizzas = new HashMap<>();
     // Agregar pizzas y sus ingredientes
     pizzas.put("Pepperoni", new ArrayList<>(Arrays.asList("pepperoni", "queso", "tomate")));
-    pizzas.put("Hawaiana", new ArrayList<>(Arrays.asList("piña", "jamón", "queso")));
-    pizzas.put("Vegetariana", new ArrayList<>(Arrays.asList("cebolla", "pimiento", "champiñones", "verduras")));
+    pizzas.put("Hawaiana", new ArrayList<>(Arrays.asList("piña", "jamon", "queso")));
+    pizzas.put("Vegetariana", new ArrayList<>(Arrays.asList("cebolla", "pimiento verde", "champiñones", "verduras")));
+    pizzas.put("5 carnes", new ArrayList<>(Arrays.asList("jamon", "salchicha", "pepperoni", "salami", "carne molida")));
+    pizzas.put("Super Suprema", new ArrayList<>(Arrays.asList("cebolla", "aceitunas", "champiñones", "chile verde", "carne de cerdo")));
     // Pedir los ingredientes de la pizza
     System.out.println("Ingrese los ingredientes que desea en su pizza (separados por comas):");
     String inputString = input.nextLine();

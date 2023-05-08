@@ -8,6 +8,7 @@ public class PizzaMatcher {
   
   public static void main(String[] args) {
     Scanner input = new Scanner(System.in);
+    System.out.println("***********¡Bienvenido a nuestro sistema de recomendaciones de pizzas!***********");
     System.out.println("¿Que tipo de masa le gusta?");
     String op = input.nextLine();
 

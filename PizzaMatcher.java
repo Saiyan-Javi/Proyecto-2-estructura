@@ -8,6 +8,9 @@ public class PizzaMatcher {
   
   public static void main(String[] args) {
     Scanner input = new Scanner(System.in);
+    System.out.println("¿Que tipo de masa le gusta?");
+    String op = input.nextLine();
+
     Map<String, ArrayList<String>> pizzas = new HashMap<>();
     // Agregar pizzas y sus ingredientes
     pizzas.put("Pepperoni", new ArrayList<>(Arrays.asList("pepperoni", "queso", "tomate")));
@@ -34,11 +37,18 @@ public class PizzaMatcher {
         maxPizza = entry.getKey();
       }
     }
+    System.out.println("¿Cuanto paga por su pizza?");
+    String op2 = input.nextLine();
+
+    System.out.println("¿Que ingredientes desearía que lleve la salsa?");
+
+
+
     // Mostrar la pizza que mejor coincide
     if (maxCount == 0) {
       System.out.println("Lo sentimos, no tenemos una pizza con los ingredientes que ha proporcionado.");
     } else {
-      System.out.println("La pizza que mejor coincide es: " + maxPizza);
+      System.out.println("La pizza que mejor coincide es: " + maxPizza + " de maza " + op);
     }
   }
   

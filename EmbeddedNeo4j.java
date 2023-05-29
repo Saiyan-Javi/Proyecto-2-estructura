@@ -101,7 +101,7 @@ public class EmbeddedNeo4j implements AutoCloseable{
 		 }
 	}
 
-	public LinkedList<String> getSimilarPizzas(String ing)
+	public LinkedList<String> getSimilarPizzas(LinkedList<String> ing)
 	{
 		 try ( Session session = driver.session() )
 		 {	 
@@ -110,13 +110,17 @@ public class EmbeddedNeo4j implements AutoCloseable{
 				 @Override
 				 public LinkedList<String> execute( Transaction tx )
 				 {
-					 Result result = tx.run( "MATCH (mc:PIZZA {ingrediente:\"" + ing + "\"}) RETURN mc.nombre");
-					 LinkedList<String> myPIZZA = new LinkedList<String>();
-					 List<Record> registros = result.list();
-					 for (int i = 0; i < registros.size(); i++) {
-						 
-						 myPIZZA.add(registros.get(i).get("mc.nombre").asString());
-					 }
+					LinkedList<String> myPIZZA = new LinkedList<String>();
+					
+					for (String ingr : ing) {
+						Result result = tx.run( "MATCH (mc:PIZZA)-[:CONTIENE]->(:INGREDIENTE {ingrediente:\"" + ingr + "\"}) RETURN mc.nombre");
+						List<Record> registros = result.list();
+						for (int i = 0; i < registros.size(); i++) {
+							
+							myPIZZA.add(registros.get(i).get("mc.nombre").asString());
+						}
+					}
+
 					 
 					 return myPIZZA;
 				 }

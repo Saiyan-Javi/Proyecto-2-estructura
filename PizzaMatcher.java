@@ -13,6 +13,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.LinkedList;
 
 public class PizzaMatcher {
   
@@ -43,7 +44,12 @@ public class PizzaMatcher {
 
     for (String s : inputList) {
       System.out.println("Pizzas que le podrían gustar incluyen:");
-      database.getSimilarPizzas(s);
+     
+      LinkedList<String> pizzaList = database.getSimilarPizzas(s);
+      for (String b : pizzaList) {
+    	  System.out.println(b);
+      }
+      
     }
 
     // Comparar los ingredientes de la pizza ingresados con los ingredientes de las pizzas disponibles

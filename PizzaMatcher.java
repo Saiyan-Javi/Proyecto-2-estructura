@@ -1,3 +1,13 @@
+/*
+ * Universidad del Valle de Guatemala
+ * Algoritmos y Estructuras de Datos
+ * Sección 10
+ * 
+ * Nelson Escalante - 22046
+ * Juan Luis Solorzano - 201598
+ * Javier Ovalle - 22103
+ */
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -41,7 +51,6 @@ public class PizzaMatcher {
       }
     }
     System.out.println("¿Cuanto paga por su pizza?");
-    String op2 = input.nextLine();
 
     System.out.println("¿Que ingredientes desearía que lleve la salsa?");
 
@@ -85,6 +94,9 @@ public class PizzaMatcher {
         System.out.println("La pizza que mejor coincide es: " + maxPizza + " de maza " + op + " con una base de salsa de " + maxSalsa);
       } 
     }
+
+    input.close();
+
   }
   
 }

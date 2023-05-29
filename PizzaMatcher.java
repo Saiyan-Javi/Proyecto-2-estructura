@@ -22,56 +22,15 @@ public class PizzaMatcher {
     Scanner input = new Scanner(System.in);
 
     /*
-    System.out.println("***************************************************************\n" +
-            "* ¡Bienvenido a nuestro sistema de recomendaciones de pizzas! *\n" +
-            "***************************************************************");
-    System.out.println("* ¿Que tipo de masa le gusta?");
-    String op = input.nextLine();
 
-    Map<String, ArrayList<String>> pizzas = new HashMap<>();
-    // Agregar pizzas y sus ingredientes
-    pizzas.put("Pepperoni", new ArrayList<>(Arrays.asList("pepperoni", "queso", "tomate")));
-    pizzas.put("Hawaiana", new ArrayList<>(Arrays.asList("piña", "jamon", "queso")));
-    pizzas.put("Vegetariana", new ArrayList<>(Arrays.asList("cebolla", "pimiento verde", "champiñones", "verduras")));
-    pizzas.put("5 carnes", new ArrayList<>(Arrays.asList("jamon", "salchicha", "pepperoni", "salami", "carne molida")));
-    pizzas.put("Super Suprema", new ArrayList<>(Arrays.asList("cebolla", "aceitunas", "champiñones", "chile verde", "carne de cerdo")));
-    // Pedir los ingredientes de la pizza
-    System.out.println("\n*************************************************************************\n" +
-            "* Ingrese los ingredientes que desea en su pizza (separados por comas): *\n" +
-            "*************************************************************************");
-    String inputString = input.nextLine();
-    String[] inputArray = inputString.split(",");
-    ArrayList<String> inputList = new ArrayList<>(Arrays.asList(inputArray));
 
-    for (String s : inputList) {
-      System.out.println("Pizzas que le podrían gustar incluyen:");
-     
-      LinkedList<String> pizzaList = database.getSimilarPizzas(s);
-      for (String b : pizzaList) {
-    	  System.out.println(b);
-      }
-      
-    }
 
-    // Comparar los ingredientes de la pizza ingresados con los ingredientes de las pizzas disponibles
-    int maxCount = -1;
-    String maxPizza = "";
-    for (Map.Entry<String, ArrayList<String>> entry : pizzas.entrySet()) {
-      ArrayList<String> pizzaIngredients = entry.getValue();
-      int count = 0;
-      for (String ingredient : inputList) {
-        if (pizzaIngredients.contains(ingredient.trim())) {
-          count++;
-        }
-      }
-      if (count > maxCount) {
-        maxCount = count;
-        maxPizza = entry.getKey();
-      }
-    }
-    System.out.println("\n******************************\n" +
-            "* ¿Cuanto paga por su pizza? *\n" +
-            "******************************");
+
+
+
+
+
+
 
     System.out.println("\n**************************************************\n" +
             "* ¿Que ingredientes desearía que lleve la salsa? *\n" +
@@ -122,20 +81,74 @@ public class PizzaMatcher {
       } 
     }
 */
+    System.out.println("***************************************************************\n" +
+            "* ¡Bienvenido a nuestro sistema de recomendaciones de pizzas! *\n" +
+            "***************************************************************\n");
 
-    System.out.println("Este es el menú de pizzas.");
+    System.out.println("\n*****************************\n" +
+            "*      Menú de pizzas       *\n" +
+            "*****************************\n");
     LinkedList<String> myList = database.getPIZZAS();
     for (String string : myList) {
-      System.out.println(string);
+      System.out.println("* -" + string);
     }
+
+    System.out.print("\n* Ingrese la pizza que le gusta:");
+    String op = input.nextLine();
 
     System.out.println("\n");
 
-    System.out.println("Esta es la lista de ingredientes.");
+    System.out.println("\n**********************************\n" +
+            "*      Lista de ingredientes     *\n" +
+            "**********************************\n");
     LinkedList<String> ingr = database.getIngredients();
     for (String ingrediente : ingr) {
-      System.out.println(ingrediente);
+      System.out.println("* -" + ingrediente);
     }
+    Map<String, ArrayList<String>> pizzas = new HashMap<>();
+    // Agregar pizzas y sus ingredientes
+    pizzas.put("Pepperoni", new ArrayList<>(Arrays.asList("pepperoni", "queso", "tomate")));
+    pizzas.put("Hawaiana", new ArrayList<>(Arrays.asList("piña", "jamon", "queso")));
+    pizzas.put("Vegetariana", new ArrayList<>(Arrays.asList("cebo+
+            "******************************"lla", "pimiento verde", "champiñones", "verduras")));
+    pizzas.put("5 carnes", new ArrayList<>(Arrays.asList("jamon", "salchicha", "pepperoni", "salami", "carne molida")));
+    pizzas.put("Super Suprema", new ArrayList<>(Arrays.asList("cebolla", "aceitunas", "champiñones", "chile verde", "carne de cerdo")));
+    // Pedir los ingredientes de la pizza
+    System.out.print("\n* Ingrese los ingredientes que desea en su pizza (separados por comas): ");
+    String inputString = input.nextLine();
+    String[] inputArray = inputString.split(",");
+    ArrayList<String> inputList = new ArrayList<>(Arrays.asList(inputArray));
+
+    for (String s : inputList) {
+      System.out.println("Pizzas que le podrían gustar incluyen:");
+
+      LinkedList<String> pizzaList = database.getSimilarPizzas(s);
+      for (String b : pizzaList) {
+        System.out.println(b);
+      }
+
+    }
+
+    // Comparar los ingredientes de la pizza ingresados con los ingredientes de las pizzas disponibles
+    int maxCount = -1;
+    String maxPizza = "";
+    for (Map.Entry<String, ArrayList<String>> entry : pizzas.entrySet()) {
+      ArrayList<String> pizzaIngredients = entry.getValue();
+      int count = 0;
+      for (String ingredient : inputList) {
+        if (pizzaIngredients.contains(ingredient.trim())) {
+          count++;
+        }
+      }+
+            "******************************"
+      if (count > maxCount) {
+        maxCount = count;
+        maxPizza = entry.getKey();
+      }
+    }
+
+    //System.out.print("\n Ingrese cuanto paga por su pizza usualmente: ");
+
 
     input.close();
 

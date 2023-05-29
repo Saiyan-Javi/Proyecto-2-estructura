@@ -17,6 +17,8 @@ import java.util.Scanner;
 public class PizzaMatcher {
   
   public static void main(String[] args) {
+    EmbeddedNeo4j database = new EmbeddedNeo4j("bolt://localhost:7687", "neo4j", "hola12345");
+
     Scanner input = new Scanner(System.in);
     System.out.println("***************************************************************\n" +
             "* ¡Bienvenido a nuestro sistema de recomendaciones de pizzas! *\n" +
@@ -38,6 +40,12 @@ public class PizzaMatcher {
     String inputString = input.nextLine();
     String[] inputArray = inputString.split(",");
     ArrayList<String> inputList = new ArrayList<>(Arrays.asList(inputArray));
+
+    for (String s : inputList) {
+      System.out.println("Pizzas que le podrían gustar incluyen:");
+      database.getSimilarPizzas(s);
+    }
+
     // Comparar los ingredientes de la pizza ingresados con los ingredientes de las pizzas disponibles
     int maxCount = -1;
     String maxPizza = "";

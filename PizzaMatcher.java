@@ -109,25 +109,27 @@ public class PizzaMatcher {
     // Agregar pizzas y sus ingredientes
     pizzas.put("Pepperoni", new ArrayList<>(Arrays.asList("pepperoni", "queso", "tomate")));
     pizzas.put("Hawaiana", new ArrayList<>(Arrays.asList("piña", "jamon", "queso")));
-    pizzas.put("Vegetariana", new ArrayList<>(Arrays.asList("cebo+
-            "******************************"lla", "pimiento verde", "champiñones", "verduras")));
+    pizzas.put("Vegetariana", new ArrayList<>(Arrays.asList("cebolla", "pimiento verde", "champiñones", "verduras")));
     pizzas.put("5 carnes", new ArrayList<>(Arrays.asList("jamon", "salchicha", "pepperoni", "salami", "carne molida")));
     pizzas.put("Super Suprema", new ArrayList<>(Arrays.asList("cebolla", "aceitunas", "champiñones", "chile verde", "carne de cerdo")));
     // Pedir los ingredientes de la pizza
     System.out.print("\n* Ingrese los ingredientes que desea en su pizza (separados por comas): ");
     String inputString = input.nextLine();
     String[] inputArray = inputString.split(",");
+    LinkedList<String> listaa = new LinkedList<>();
+    for (String a : inputArray) {
+      listaa.add(a);
+    }
     ArrayList<String> inputList = new ArrayList<>(Arrays.asList(inputArray));
 
-    for (String s : inputList) {
-      System.out.println("Pizzas que le podrían gustar incluyen:");
-
-      LinkedList<String> pizzaList = database.getSimilarPizzas(s);
+    System.out.println("Pizzas que le podrían gustar incluyen:");
+      
+      LinkedList<String> pizzaList = database.getSimilarPizzas(listaa);
+      
       for (String b : pizzaList) {
         System.out.println(b);
       }
 
-    }
 
     // Comparar los ingredientes de la pizza ingresados con los ingredientes de las pizzas disponibles
     int maxCount = -1;
@@ -139,8 +141,7 @@ public class PizzaMatcher {
         if (pizzaIngredients.contains(ingredient.trim())) {
           count++;
         }
-      }+
-            "******************************"
+      }
       if (count > maxCount) {
         maxCount = count;
         maxPizza = entry.getKey();

@@ -10,6 +10,8 @@ import static org.neo4j.driver.Values.parameters;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * @author Administrator
@@ -101,7 +103,7 @@ public class EmbeddedNeo4j implements AutoCloseable{
 		 }
 	}
 
-	public LinkedList<String> getSimilarPizzas(LinkedList<String> ing)
+	public LinkedList<String> getSimilarPizzas(LinkedList<String> ingr)
 	{
 		 try ( Session session = driver.session() )
 		 {	 
@@ -110,19 +112,39 @@ public class EmbeddedNeo4j implements AutoCloseable{
 				 @Override
 				 public LinkedList<String> execute( Transaction tx )
 				 {
-					LinkedList<String> myPIZZA = new LinkedList<String>();
-					
-					for (String ingr : ing) {
-						Result result = tx.run( "MATCH (mc:PIZZA)-[:CONTIENE]->(:INGREDIENTE {ingrediente:\"" + ingr + "\"}) RETURN mc.nombre");
+					HashMap<String, Integer> myPIZZA = new HashMap<String, Integer>();
+
+					for (String ing : ingr) {
+						Result result = tx.run( "MATCH (mc:PIZZA)-[:CONTIENE]->(:INGREDIENTE {ingrediente:\"" + ing + "\"}) RETURN mc.nombre");
 						List<Record> registros = result.list();
 						for (int i = 0; i < registros.size(); i++) {
+							String piz = registros.get(i).get("mc.nombre").asString();
 							
-							myPIZZA.add(registros.get(i).get("mc.nombre").asString());
+							if (myPIZZA.containsKey(piz)) {
+								myPIZZA.put(piz, myPIZZA.get(piz) + 1);
+							} else {
+								myPIZZA.put(piz, 1);
+							}
 						}
 					}
+					
+
+						int highestVal = 0;
+						for (String a: myPIZZA.keySet()) {
+							if (myPIZZA.get(a) > highestVal) {
+								highestVal = myPIZZA.get(a);
+							}
+						}
+
+						LinkedList<String> list = new LinkedList<>();
+						for (String b : myPIZZA.keySet()) {
+							if (highestVal == myPIZZA.get(b)) {
+								list.add(b);
+							}
+						}
 
 					 
-					 return myPIZZA;
+					 return list;
 				 }
 			 } );
 			 

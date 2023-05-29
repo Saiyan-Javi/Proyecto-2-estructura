@@ -103,6 +103,55 @@ public class EmbeddedNeo4j implements AutoCloseable{
 		 }
 	}
 
+	public LinkedList<String> getSimilarPizzas(String p) //LinkedList<String> ingr la verdad ni idea de que hacer
+	{
+		try ( Session session = driver.session() )
+		{
+			LinkedList<String> dPIZZA = session.readTransaction( new TransactionWork<LinkedList<String>>()
+			{
+				@Override
+				public LinkedList<String> execute( Transaction tx )
+				{
+					HashMap<String, Integer> myPIZZA = new HashMap<String, Integer>();
+
+					for (String ing : ingr) {
+						Result result = tx.run( "MATCH (mc:PIZZA)-[:CONTIENE]->(:INGREDIENTE {ingrediente:\"" + ing + "\"}) RETURN mc.nombre");
+						List<Record> registros = result.list();
+						for (int i = 0; i < registros.size(); i++) {
+							String piz = registros.get(i).get("mc.nombre").asString();
+
+							if (myPIZZA.containsKey(piz)) {
+								myPIZZA.put(piz, myPIZZA.get(piz) + 1);
+							} else {
+								myPIZZA.put(piz, 1);
+							}
+						}
+					}
+
+
+					int highestVal = 0;
+					for (String a: myPIZZA.keySet()) {
+						if (myPIZZA.get(a) > highestVal) {
+							highestVal = myPIZZA.get(a);
+						}
+					}
+
+					LinkedList<String> list = new LinkedList<>();
+					for (String b : myPIZZA.keySet()) {
+						if (highestVal == myPIZZA.get(b)) {
+							list.add(b);
+						}
+					}
+
+
+					return list;
+				}
+			} );
+
+			return dPIZZA;
+		}
+	}
+
 	public LinkedList<String> getSimilarPizzas(LinkedList<String> ingr)
 	{
 		 try ( Session session = driver.session() )

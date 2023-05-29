@@ -19,8 +19,9 @@ public class PizzaMatcher {
   
   public static void main(String[] args) {
     EmbeddedNeo4j database = new EmbeddedNeo4j("bolt://localhost:7687", "neo4j", "hola12345");
-
     Scanner input = new Scanner(System.in);
+
+    /*
     System.out.println("***************************************************************\n" +
             "* ¡Bienvenido a nuestro sistema de recomendaciones de pizzas! *\n" +
             "***************************************************************");
@@ -119,6 +120,21 @@ public class PizzaMatcher {
       } else{
         System.out.println("*\n * La pizza que mejor coincide es: " + maxPizza + " de maza " + op + " con una base de salsa de " + maxSalsa);
       } 
+    }
+*/
+
+    System.out.println("Este es el menú de pizzas.");
+    LinkedList<String> myList = database.getPIZZAS();
+    for (String string : myList) {
+      System.out.println(string);
+    }
+
+    System.out.println("\n");
+
+    System.out.println("Esta es la lista de ingredientes.");
+    LinkedList<String> ingr = database.getIngredients();
+    for (String ingrediente : ingr) {
+      System.out.println(ingrediente);
     }
 
     input.close();

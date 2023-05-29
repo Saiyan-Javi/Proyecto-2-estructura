@@ -18,8 +18,10 @@ public class PizzaMatcher {
   
   public static void main(String[] args) {
     Scanner input = new Scanner(System.in);
-    System.out.println("***********¡Bienvenido a nuestro sistema de recomendaciones de pizzas!***********");
-    System.out.println("¿Que tipo de masa le gusta?");
+    System.out.println("***************************************************************\n" +
+            "* ¡Bienvenido a nuestro sistema de recomendaciones de pizzas! *\n" +
+            "***************************************************************");
+    System.out.println("* ¿Que tipo de masa le gusta?");
     String op = input.nextLine();
 
     Map<String, ArrayList<String>> pizzas = new HashMap<>();
@@ -30,7 +32,9 @@ public class PizzaMatcher {
     pizzas.put("5 carnes", new ArrayList<>(Arrays.asList("jamon", "salchicha", "pepperoni", "salami", "carne molida")));
     pizzas.put("Super Suprema", new ArrayList<>(Arrays.asList("cebolla", "aceitunas", "champiñones", "chile verde", "carne de cerdo")));
     // Pedir los ingredientes de la pizza
-    System.out.println("Ingrese los ingredientes que desea en su pizza (separados por comas):");
+    System.out.println("\n*************************************************************************\n" +
+            "* Ingrese los ingredientes que desea en su pizza (separados por comas): *\n" +
+            "*************************************************************************");
     String inputString = input.nextLine();
     String[] inputArray = inputString.split(",");
     ArrayList<String> inputList = new ArrayList<>(Arrays.asList(inputArray));
@@ -50,9 +54,13 @@ public class PizzaMatcher {
         maxPizza = entry.getKey();
       }
     }
-    System.out.println("¿Cuanto paga por su pizza?");
+    System.out.println("\n******************************\n" +
+            "* ¿Cuanto paga por su pizza? *\n" +
+            "******************************");
 
-    System.out.println("¿Que ingredientes desearía que lleve la salsa?");
+    System.out.println("\n**************************************************\n" +
+            "* ¿Que ingredientes desearía que lleve la salsa? *\n" +
+            "**************************************************");
 
     Map<String, ArrayList<String>> salsas = new HashMap<>();
     // Agregar salsas y sus ingredientes
@@ -85,13 +93,17 @@ public class PizzaMatcher {
 
     // Mostrar la pizza que mejor coincide
     if (maxCount == 0 ) {
-      System.out.println("Lo sentimos, no tenemos una pizza con los ingredientes que ha proporcionado.");
+      System.out.println("\n********************************************************************************\n" +
+              "* Lo sentimos, no tenemos una pizza con los ingredientes que ha proporcionado. *\n" +
+              "********************************************************************************");
     } else {
         if (maxCount1 == 0){
-        System.out.println("Lo sentimos, no tenemos una salsa con los ingredientes que ha proporcionado.");
-        System.out.println("La pizza que mejor coincide es: " + maxPizza + " de maza " + op);
+        System.out.println("********************************************************************************\n" +
+                "* Lo sentimos, no tenemos una salsa con los ingredientes que ha proporcionado. *\n" +
+                "********************************************************************************");
+        System.out.println("*\n * La pizza que mejor coincide es: " + maxPizza + " de maza " + op);
       } else{
-        System.out.println("La pizza que mejor coincide es: " + maxPizza + " de maza " + op + " con una base de salsa de " + maxSalsa);
+        System.out.println("*\n * La pizza que mejor coincide es: " + maxPizza + " de maza " + op + " con una base de salsa de " + maxSalsa);
       } 
     }
 

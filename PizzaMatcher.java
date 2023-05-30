@@ -84,11 +84,14 @@ public class PizzaMatcher {
 */
 
     // Agregar pizzas y sus ingredientes
+    /* 
+    
     pizzas.put("Pepperoni", new ArrayList<>(Arrays.asList("pepperoni", "queso", "tomate")));
     pizzas.put("Hawaiana", new ArrayList<>(Arrays.asList("piña", "jamon", "queso")));
     pizzas.put("Vegetariana", new ArrayList<>(Arrays.asList("cebolla", "pimiento verde", "champiñones", "verduras")));
     pizzas.put("5 carnes", new ArrayList<>(Arrays.asList("jamon", "salchicha", "pepperoni", "salami", "carne molida")));
     pizzas.put("Super Suprema", new ArrayList<>(Arrays.asList("cebolla", "aceitunas", "champiñones", "chile verde", "carne de cerdo")));
+    */
 
     int op = 0;
     do {
@@ -115,9 +118,9 @@ public class PizzaMatcher {
         //crear metodo en EmbeddedNeo4j.java para recomendar pizza basado en los ingredientes de la pizza ingresada
           System.out.println("Pizzas que le podrían gustar incluyen:");
 
-          LinkedList<String> pizzaList = database.getSimilarPizzas(p);
+          LinkedList<String> pizzaList2 = database.getSimilarPizzas(p);
 
-          for (String b : pizzaList) {
+          for (String b : pizzaList2) {
             System.out.println(b);
           }
         break;

@@ -112,37 +112,18 @@ public class EmbeddedNeo4j implements AutoCloseable{
 				@Override
 				public LinkedList<String> execute( Transaction tx )
 				{
-					HashMap<String, Integer> myPIZZA = new HashMap<String, Integer>();
+					LinkedList<String> ingredientes = new LinkedList<>();
+					LinkedList<String> list = new LinkedList<>();
 
-					for (String ing : ingr) {
-						Result result = tx.run( "MATCH (mc:PIZZA)-[:CONTIENE]->(:INGREDIENTE {ingrediente:\"" + ing + "\"}) RETURN mc.nombre");
+						Result result = tx.run( "MATCH (mc:PIZZA {nombre: \"" + p + "\"})-[:CONTIENE]->(b:INGREDIENTE) RETURN b.ingrediente");
 						List<Record> registros = result.list();
 						for (int i = 0; i < registros.size(); i++) {
-							String piz = registros.get(i).get("mc.nombre").asString();
+							String piz = registros.get(i).get("b.ingrediente").asString();
 
-							if (myPIZZA.containsKey(piz)) {
-								myPIZZA.put(piz, myPIZZA.get(piz) + 1);
-							} else {
-								myPIZZA.put(piz, 1);
-							}
+							ingredientes.add(piz);
 						}
-					}
 
-
-					int highestVal = 0;
-					for (String a: myPIZZA.keySet()) {
-						if (myPIZZA.get(a) > highestVal) {
-							highestVal = myPIZZA.get(a);
-						}
-					}
-
-					LinkedList<String> list = new LinkedList<>();
-					for (String b : myPIZZA.keySet()) {
-						if (highestVal == myPIZZA.get(b)) {
-							list.add(b);
-						}
-					}
-
+					list = getSimilarPizzas(ingredientes);
 
 					return list;
 				}

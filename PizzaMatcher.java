@@ -8,10 +8,6 @@
  * Javier Ovalle - 22103
  */
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Scanner;
 import java.util.LinkedList;
 
@@ -63,7 +59,7 @@ public class PizzaMatcher {
         for (String ingrediente : ingr) {
           System.out.println("* -" + ingrediente);
         }
-        Map<String, ArrayList<String>> pizzas = new HashMap<>();
+
         // Pedir los ingredientes de la pizza
         System.out.print("\n* Ingrese los ingredientes que desea en su pizza (separados por comas): ");
         String inputString = input.nextLine();
@@ -72,7 +68,6 @@ public class PizzaMatcher {
         for (String a : inputArray) {
           listaa.add(a);
         }
-        ArrayList<String> inputList = new ArrayList<>(Arrays.asList(inputArray));
 
         System.out.println("Pizzas que le podrían gustar incluyen:");
 
@@ -93,6 +88,7 @@ public class PizzaMatcher {
     }while( op != 3);
 
     input.close();
+    System.exit(0);
 
   }
   public static String getNumber(Scanner keyboard) {
@@ -101,7 +97,6 @@ public class PizzaMatcher {
 
     while (!isNumber) { // Vuelve a pedir input hasta que este sea un número
       try {
-        int nm = Integer.parseInt(number); // Verifica que el input sea un número
         isNumber = true;
       } catch (NumberFormatException nft) {
         System.out.println("ERROR. Verifique que el valor ingresado sea numérico e intente de nuevo.");

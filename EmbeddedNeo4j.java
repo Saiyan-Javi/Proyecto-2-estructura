@@ -6,11 +6,9 @@ import org.neo4j.driver.Result;
 import org.neo4j.driver.Session;
 import org.neo4j.driver.Transaction;
 import org.neo4j.driver.TransactionWork;
-import static org.neo4j.driver.Values.parameters;
 
 import java.util.LinkedList;
 import java.util.List;
-import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -33,25 +31,6 @@ public class EmbeddedNeo4j implements AutoCloseable{
 		driver.close();
 	}
 
-	public void printGreeting( final String message )
-	{
-		try ( Session session = driver.session() )
-		{
-			String greeting = session.writeTransaction( new TransactionWork<String>()
-			{
-				@Override
-				public String execute( Transaction tx )
-				{
-					Result result = tx.run( "CREATE (a:Greeting) " +
-													 "SET a.message = $message " +
-													 "RETURN a.message + ', from node ' + id(a)",
-							parameters( "message", message ) );
-					return result.single().get( 0 ).asString();
-				}
-			} );
-			System.out.println( greeting );
-		}
-	}
 	
 	public LinkedList<String> getPIZZAS()
 	{
@@ -103,7 +82,7 @@ public class EmbeddedNeo4j implements AutoCloseable{
 		 }
 	}
 
-	public LinkedList<String> getSimilarPizzas(String p) //LinkedList<String> ingr la verdad ni idea de que hacer
+	public LinkedList<String> getSimilarPizzas(String p) //Este método devuelve pizzas en base a otra pizza.
 	{
 		try ( Session session = driver.session() )
 		{
@@ -133,7 +112,7 @@ public class EmbeddedNeo4j implements AutoCloseable{
 		}
 	}
 
-	public LinkedList<String> getSimilarPizzas(LinkedList<String> ingr)
+	public LinkedList<String> getSimilarPizzas(LinkedList<String> ingr) //Este método devuelve pizzas en base a los ingredientes.
 	{
 		 try ( Session session = driver.session() )
 		 {	 
@@ -180,29 +159,6 @@ public class EmbeddedNeo4j implements AutoCloseable{
 			 
 			 return dPIZZA;
 		 }
-	}
-
-	public String insertMovie(String title, int releaseYear, String tagline) {
-		try ( Session session = driver.session() ) {
-			
-			String result = session.writeTransaction( new TransactionWork<String>()
-			
-			{
-				@Override
-				public String execute( Transaction tx )
-				{
-					tx.run( "CREATE (Test:Movie {title:'" + title + "', released:"+ releaseYear +", tagline:'"+ tagline +"'})");
-					
-					return "OK";
-				}
-			}
-			
-			);
-			
-			return result;
-		} catch (Exception e) {
-			return e.getMessage();
-		}
 	}
 
 }

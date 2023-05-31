@@ -14,7 +14,7 @@ import java.util.LinkedList;
 public class PizzaMatcher {
   
   public static void main(String[] args) {
-    EmbeddedNeo4j database = new EmbeddedNeo4j("bolt://localhost:7687", "neo4j", "hola12345");
+    EmbeddedNeo4j database = new EmbeddedNeo4j("bolt://34.234.223.15:7687", "neo4j", "trim-overcurrent-discontinuations");
     Scanner input = new Scanner(System.in);
 
     int op = 0;
